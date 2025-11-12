@@ -64,7 +64,7 @@ export const ImageCoverScene = () => {
       position: { top: '42%', right: '28%' },
       size: { width: '150px', height: '180px' },
       question: 'Eva\'s favorite hobby?',
-      answer: 'Collecting inspiration from everywhere and turning it into something wonderful!',
+      answer: 'drinking lattes!',
       tooltipPosition: 'left'
     }
   ];

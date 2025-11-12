@@ -65,6 +65,26 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
+## Deploying to GitHub Pages
+
+This repository already includes the `gh-pages` devDependency and a `deploy` script in `package.json`.
+
+From the `frontend` directory you can deploy with yarn:
+
+1. Install dependencies (if you haven't already):
+
+	yarn install
+
+2. Build and publish to GitHub Pages (this runs `predeploy` then `deploy`):
+
+	yarn deploy
+
+The `homepage` field in `package.json` is set to the repository Pages URL so asset paths will be correct:
+
+`https://evacoffee.github.io/eva-personal`
+
+Note: GitHub Pages can serve from the `gh-pages` branch (created by the `gh-pages` package). After running `yarn deploy`, go to your repository Settings → Pages and verify the site is served from the `gh-pages` branch (if GitHub didn't auto-configure it).
+
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
