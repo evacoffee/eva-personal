@@ -1,4 +1,5 @@
 import React from 'react';
+import coverSceneImage from '/eva-personal/images/cover-scene.png';
 import { InteractiveHotspot } from './InteractiveHotspot';
 
 export const ImageCoverScene = () => {
@@ -64,7 +65,7 @@ export const ImageCoverScene = () => {
       position: { top: '42%', right: '28%' },
       size: { width: '150px', height: '180px' },
       question: 'Eva\'s favorite hobby?',
-      answer: 'drinking lattes!',
+      answer: 'drinking lattes',
       tooltipPosition: 'left'
     }
   ];
@@ -75,7 +76,7 @@ export const ImageCoverScene = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url(https://customer-assets.emergentagent.com/job_d80cf960-0b87-4544-8cfa-f557342f00f7/artifacts/zfh2qcke_image.png)',
+          backgroundImage: `url(${coverSceneImage})`,
           backgroundSize: 'cover'
         }}
       >
