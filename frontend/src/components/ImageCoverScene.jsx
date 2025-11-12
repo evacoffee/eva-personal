@@ -1,5 +1,5 @@
 import React from 'react';
-import coverSceneImage from '/eva-personal/images/cover-scene.png';
+import coverSceneImage from '/images/cover-scene.png';
 import { InteractiveHotspot } from './InteractiveHotspot';
 
 export const ImageCoverScene = () => {
