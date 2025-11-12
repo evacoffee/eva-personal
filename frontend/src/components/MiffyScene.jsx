@@ -1,131 +1,150 @@
-import React from 'react';
-import { MiffyCharacter } from './MiffyCharacter';
+import React, { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+
+const InteractiveHotspot = ({ position, size, question, answer, tooltipPosition = 'top' }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const tooltipPositions = {
+    top: 'bottom-full mb-4 left-1/2 -translate-x-1/2',
+    bottom: 'top-full mt-4 left-1/2 -translate-x-1/2',
+    left: 'right-full mr-4 top-1/2 -translate-y-1/2',
+    right: 'left-full ml-4 top-1/2 -translate-y-1/2'
+  };
+
+  return (
+    <div
+      className="absolute cursor-pointer group transition-transform hover:scale-110 z-20"
+      style={{
+        ...position,
+        width: size.width,
+        height: size.height
+      }}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      {/* Invisible hotspot with subtle hover indicator */}
+      <div className="w-full h-full rounded-full opacity-0 group-hover:opacity-30 bg-[hsl(var(--miffy-yellow))] transition-opacity duration-300 animate-pulse"></div>
+
+      {/* Tooltip with Q&A */}
+      {showTooltip && (
+        <Card className={`absolute ${tooltipPositions[tooltipPosition]} w-72 tooltip-card shadow-2xl border-2 z-50 bg-[hsl(var(--card))]/95 backdrop-blur-sm`}>
+          <CardContent className="p-5">
+            <div className="space-y-3">
+              <p className="text-base font-semibold text-foreground" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+                {question}
+              </p>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {answer}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+};
 
 export const MiffyScene = () => {
-  const miffyData = [
+  const hotspots = [
     {
-      position: { top: '15%', left: '8%' },
-      color: 'blue',
-      size: 'lg',
+      // Top left Miffy (white with blue shirt)
+      position: { top: '28%', left: '12%' },
+      size: { width: '80px', height: '100px' },
       question: 'Where is Eva from?',
       answer: 'Purgatory - a place where dreams meet reality! Born on 06/25/2021.',
-      delay: 0.1
+      tooltipPosition: 'bottom'
     },
     {
-      position: { top: '12%', right: '12%' },
-      color: 'pink',
-      size: 'md',
+      // Top right Miffy (white)
+      position: { top: '15%', right: '8%' },
+      size: { width: '90px', height: '110px' },
       question: 'What does Eva love?',
       answer: 'Creating beautiful things, exploring new ideas, and bringing joy through design!',
-      delay: 0.3
+      tooltipPosition: 'bottom'
     },
     {
-      position: { top: '45%', left: '5%' },
-      color: 'orange',
-      size: 'md',
+      // Bottom left Miffy (blue shirt)
+      position: { bottom: '15%', left: '15%' },
+      size: { width: '85px', height: '105px' },
       question: 'What\'s Eva\'s superpower?',
       answer: 'Turning coffee into code and ideas into reality with a sprinkle of creativity!',
-      delay: 0.5
+      tooltipPosition: 'top'
     },
     {
-      position: { top: '55%', right: '8%' },
-      color: 'yellow',
-      size: 'lg',
+      // Bottom right Miffy
+      position: { bottom: '12%', right: '12%' },
+      size: { width: '75px', height: '95px' },
       question: 'What makes Eva happy?',
       answer: 'Cute designs, good vibes, and making people smile with delightful experiences!',
-      delay: 0.7
+      tooltipPosition: 'top'
     },
     {
-      position: { bottom: '15%', left: '15%' },
-      color: 'lavender',
-      size: 'md',
+      // Left coffee cup (blue outlined)
+      position: { top: '18%', left: '20%' },
+      size: { width: '70px', height: '90px' },
       question: 'What\'s Eva\'s favorite quote?',
       answer: '"Keep it simple, make it cute, and always add a little magic!"',
-      delay: 0.9
+      tooltipPosition: 'right'
     },
     {
-      position: { bottom: '12%', right: '18%' },
-      color: 'green',
-      size: 'md',
+      // Right coffee cup (blue with beans text)
+      position: { top: '52%', right: '15%' },
+      size: { width: '75px', height: '95px' },
       question: 'What\'s Eva\'s mission?',
       answer: 'To spread joy and creativity, one pixel at a time!',
-      delay: 1.1
+      tooltipPosition: 'left'
     },
     {
-      position: { top: '35%', left: '48%' },
-      color: 'red',
-      size: 'sm',
+      // ID Card center - Eva's photo area
+      position: { top: '38%', left: '40%' },
+      size: { width: '180px', height: '220px' },
+      question: 'Who is Eva?',
+      answer: 'A creative soul who loves turning ideas into beautiful realities. Licensed to travel through the world of imagination!',
+      tooltipPosition: 'bottom'
+    },
+    {
+      // Right side of ID (text area)
+      position: { top: '42%', right: '28%' },
+      size: { width: '150px', height: '180px' },
       question: 'Eva\'s favorite hobby?',
       answer: 'Collecting inspiration from everywhere and turning it into something wonderful!',
-      delay: 0.4
-    },
-    {
-      position: { top: '65%', left: '45%' },
-      color: 'blue',
-      size: 'sm',
-      question: 'What drives Eva?',
-      answer: 'Passion for creativity, curiosity about the world, and love for making things better!',
-      delay: 0.8
+      tooltipPosition: 'left'
     }
   ];
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-10 right-10 floating" style={{ animationDelay: '0.5s' }}>
-        <div className="w-20 h-24 bg-gradient-to-br from-[hsl(var(--miffy-blue))] to-[hsl(var(--miffy-lavender))] rounded-lg opacity-40 transform rotate-12"></div>
-      </div>
-      
-      <div className="absolute bottom-20 left-10 floating" style={{ animationDelay: '1s' }}>
-        <div className="w-16 h-20 bg-gradient-to-br from-[hsl(var(--miffy-pink))] to-[hsl(var(--miffy-yellow))] rounded-lg opacity-40 transform -rotate-12"></div>
-      </div>
-
-      {/* Stars decoration */}
-      <div className="absolute top-1/4 left-1/3">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" className="wiggle-on-hover">
-          <path d="M15 0L17.5 12.5L30 15L17.5 17.5L15 30L12.5 17.5L0 15L12.5 12.5L15 0Z" fill="hsl(var(--miffy-orange))" opacity="0.6" />
-        </svg>
+      {/* Full cover background image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(https://customer-assets.emergentagent.com/job_d80cf960-0b87-4544-8cfa-f557342f00f7/artifacts/zfh2qcke_image.png)',
+          backgroundSize: 'cover'
+        }}
+      >
+        {/* Subtle overlay for better contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(var(--background))]/5"></div>
       </div>
 
-      <div className="absolute top-2/3 right-1/3">
-        <svg width="25" height="25" viewBox="0 0 30 30" fill="none" className="wiggle-on-hover">
-          <path d="M15 0L17.5 12.5L30 15L17.5 17.5L15 30L12.5 17.5L0 15L12.5 12.5L15 0Z" fill="hsl(var(--miffy-red))" opacity="0.6" />
-        </svg>
-      </div>
-
-      {/* Miffy Characters */}
-      {miffyData.map((miffy, index) => (
-        <MiffyCharacter
+      {/* Interactive hotspots */}
+      {hotspots.map((hotspot, index) => (
+        <InteractiveHotspot
           key={index}
-          position={miffy.position}
-          color={miffy.color}
-          size={miffy.size}
-          question={miffy.question}
-          answer={miffy.answer}
-          delay={miffy.delay}
+          position={hotspot.position}
+          size={hotspot.size}
+          question={hotspot.question}
+          answer={hotspot.answer}
+          tooltipPosition={hotspot.tooltipPosition}
         />
       ))}
 
-      {/* Center Card with image */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="relative w-80 p-1 bg-gradient-to-br from-[hsl(var(--miffy-blue))] via-[hsl(var(--miffy-pink))] to-[hsl(var(--miffy-lavender))] rounded-2xl shadow-2xl wiggle-on-hover">
-          <div className="bg-[hsl(var(--card))] rounded-xl p-6">
-            <div className="flex items-center justify-center mb-4">
-              <img
-                src="https://customer-assets.emergentagent.com/job_d80cf960-0b87-4544-8cfa-f557342f00f7/artifacts/zfh2qcke_image.png"
-                alt="Eva's ID"
-                className="w-full rounded-lg shadow-lg"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Bottom hint text */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <p className="text-sm text-muted-foreground text-center" style={{ fontFamily: 'Fredoka, sans-serif' }}>
-          hover over the miffies to learn more about eva! ✨
-        </p>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+        <div className="bg-[hsl(var(--card))]/90 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg border border-[hsl(var(--border))]">
+          <p className="text-sm text-foreground text-center font-medium" style={{ fontFamily: 'Fredoka, sans-serif' }}>
+            hover over the miffies & coffee cups to learn more about eva! ✨
+          </p>
+        </div>
       </div>
     </div>
   );
