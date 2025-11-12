@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/eva-personal/static/css/main.35543b51.css",
+    "main.js": "/eva-personal/static/js/main.25653fa8.js",
+    "index.html": "/eva-personal/index.html",
+    "main.35543b51.css.map": "/eva-personal/static/css/main.35543b51.css.map",
+    "main.25653fa8.js.map": "/eva-personal/static/js/main.25653fa8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35543b51.css",
+    "static/js/main.25653fa8.js"
+  ]
+}
